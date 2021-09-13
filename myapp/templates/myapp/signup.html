@@ -1,0 +1,25 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <br>
+        <h2>Singup</h2>
+        <br>
+        <form action="" method="post">
+            {% csrf_token %}
+            <!-- ↑通信の安全性確保のための記述 -->
+            {{ form.non_field_errors }}
+            <!-- ↑共通のエラーメッセージをここに出す -->
+            {% for field in form %}
+                {{ field.label }}
+                {{ field }}
+                {{ field.errors }}
+                <br>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Singup</button>
+            <br>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

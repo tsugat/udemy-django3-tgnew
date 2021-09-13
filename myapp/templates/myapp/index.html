@@ -1,0 +1,52 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="p-4 shadow-4 rounded-3" style="background-color: hsl(167, 37%, 61%);">
+  <h2 class="display-4">{{ request.site.siteconfig.top_title }}</h2>
+  <p class="lead">{{ request.site.siteconfig.top_subtitle }}</h2>
+
+  <!-- <hr class="my-4" /> -->
+
+  <!-- <p>
+    It uses utility classes for typography and spacing to space content out within the
+    larger container.
+  </p> -->
+  <!-- <button type="button" class="btn btn-primary">
+    Learn more
+  </button> -->
+</div>
+
+<br>
+
+<!-- Jumbotron -->
+
+
+
+<!-- card start -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for item in post_list %}
+
+  <div class="col">
+    <div class="card h-100">
+      {% if item.thumbnail %}
+        <img class="card-img-top" src="{{ item.thumbnail.url }}" alt="{{ item.title }}">
+      {% else %}
+        <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class="card-img-top" alt="{{ item.title }}">
+      {% endif %}
+      <!-- ↓いずれにせよIDは出力する -->
+      <a href="{% url 'myapp:post_detail' item.id %}">
+
+        <div class="card-body">
+          <h5 class="card-title">{{ item.title }}<small>{{ item.author }}</small></h5>
+          <p>{{ item.category }}</p>
+          <p class="card-text"> {{ item.content | safe | truncatechars_html:30 }} </p>
+          <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn btn-light-blue btn-md">もっと読む</a>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+<!-- card end -->
+{% endblock %}
